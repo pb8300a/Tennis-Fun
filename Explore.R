@@ -9,11 +9,16 @@ return_outcome = read.csv("charting-m-stats-ReturnOutcomes.csv",header = TRUE) #
 
 ################################################################################
 #Who is in this dataset?
-Players = c(toupper(as.character(match_metadata$Player.1)),toupper(as.character(match_metadata$Player.2)))
-proper=function(x){
-        paste0(toupper(substr(x, 1, 1)), tolower(substring(x, 2)))
+Players = c(tolower(as.character(match_metadata$Player.1)),tolower(as.character(match_metadata$Player.2)))
+simpleCap <- function(x) {
+        s <- strsplit(x, " ")[[1]]
+        paste(toupper(substring(s, 1,1)), substring(s, 2),
+              sep="", collapse=" ")
 }
-Players = proper(Players)
+for(i in 1:length(Players)){
+        Players[i] = simpleCap(Players[i])
+}
+
 Total_Matches = sum(table(Players))
 Total_Players = length(unique(Players))
 Matches_Per_Player= sort(table(Players),decreasing = TRUE)
