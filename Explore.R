@@ -17,3 +17,15 @@ Total_Matches = sum(table(Players))
 Total_Players = length(unique(Players))
 Matches_Per_Player= sort(table(Players),decreasing = TRUE)
 sum(Matches_Per_Player[1:10])
+sum(Matches_Per_Player[Matches_Per_Player<20])
+
+top_100= barplot(Matches_Per_Player[1:100],width = rep(1,length(Matches_Per_Player)), col = "greenyellow",
+                xlab = "",ylab = "# Matches",xaxt = "n",ylim = c(0,325),
+                beside = TRUE,space = 0.1,lwd = 0.1)
+
+top_10= barplot(Matches_Per_Player[1:10],width = rep(1,10), col = "greenyellow",
+                xlab = "",ylab = "# Matches",xaxt = "n",ylim = c(0,325),
+                beside = TRUE,space = 0.1,lwd = 0.1)
+labs <- names(Matches_Per_Player)[1:10]
+text(cex=1, x=top_10-.25, y=-25, labs, xpd=TRUE, srt=45)
+box()
