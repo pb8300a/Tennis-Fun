@@ -21,7 +21,7 @@ point_match1 = point_lvl[point_lvl$match_id == as.character(sample_id),]
 set_counter = table(rowSums(point_match1[,c("Set1","Set2")]))
 player_name = c(as.character(point_match1$Player.1)[1],as.character(point_match1$Player.2)[1])
 
-par(mfrow =c(length(set_counter),1),mar = c(1,5,1,1))
+par(mfrow =c(length(set_counter),1),mar = c(1,5,3,1))
 
 for(i in names(set_counter)){
         #i = "0"
@@ -29,7 +29,8 @@ for(i in names(set_counter)){
         
         start_serving = point_set$Svr[1]
         plot(point_set$PtWinner, type = "p", pch = 16,ylim = c(0,3), cex = 0.5,
-             yaxt = "n",ylab = "",xlab = "",xaxt = "n",xaxs = "r")
+             yaxt = "n",ylab = "",xlab = "",xaxt = "n",xaxs = "r", 
+             main = paste("Set", as.numeric(i)+1))
         #text(x=-0.5,y = start_serving, "(s)", cex = 0.6)
         axis(side = 2, at = c(1,2), labels = c(sub(" ", "\n", player_name)),las = 2, tck = 0)
         abline(h=1.5)
@@ -61,6 +62,7 @@ for(i in names(set_counter)){
         }
       
 }
+
 
 
 
