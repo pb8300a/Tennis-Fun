@@ -18,14 +18,17 @@ point_match1 = point_lvl[point_lvl$match_id == "19981005-M-Basel-R32-Andre_Agass
 ## A Timeline of the Match ##
 set_counter = table(rowSums(point_match1[,c("Set1","Set2")]))
 player_name = c(as.character(point_match1$Player.1)[1],as.character(point_match1$Player.2)[1])
+
 par(mfrow =c(length(set_counter),1),mar = c(1,5,1,1))
 
 for(i in names(set_counter)){
-        #i = "1"
+        #i = "0"
         point_set=point_match1[rowSums(point_match1[,c("Set1","Set2")])==as.numeric(i),]
         
+        start_serving = point_set$Svr[1]
         plot(point_set$PtWinner, type = "p", pch = 16,ylim = c(0,3), cex = 0.5,
              yaxt = "n",ylab = "",xlab = "",xaxt = "n")
+        text(x=0,y = start_serving, "(s)", cex = 0.75)
         axis(side = 2, at = c(1,2), labels = c(sub(" ", "\n", player_name)),las = 2)
         
         last_pt = aggregate(point_set$Pt, by = list(point_set$Gm.), FUN = tail, n = 1)
@@ -50,5 +53,7 @@ for(i in names(set_counter)){
         }
       
 }
+
+
 
 
