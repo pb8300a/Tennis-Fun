@@ -3,16 +3,18 @@ data = read.csv("charting-w-stats-ServeBasics.csv")
 match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
 raw_points = read.csv("charting-m-points.csv", header = TRUE)
 
+player_name = "Roger Federer"
+
 raw_points$num_id = seq(1:nrow(raw_points))
-match_lvl= match_metadata[match_metadata$Player.1 == "Roger Federer" | match_metadata$Player.2 == "Roger Federer", ]
+match_lvl= match_metadata[match_metadata$Player.1 == player_name | match_metadata$Player.2 ==player_name , ]
 point_lvl = merge(raw_points,match_lvl , by = "match_id")
 point_lvl = point_lvl[order(point_lvl$num_id),]
 
-
+sample_id = sample(unique(point_lvl$match_id), 1)
 #################################
 #####Plot the timeline of a match
 #################################
-point_match1 = point_lvl[point_lvl$match_id == "19981005-M-Basel-R32-Andre_Agassi-Roger_Federer",]
+point_match1 = point_lvl[point_lvl$match_id == as.character(sample_id),]
 
 
 ## A Timeline of the Match ##
@@ -50,7 +52,7 @@ for(i in names(set_counter)){
                 if(count != 0){lastpoint = all$Pt[count]}
                 midpoint = (lastpoint + j+1)/2
                 count =count+1
-                abline(v = j+0.5, col = "gray")
+                if(j != max(all$Pt)){abline(v = j+0.5, col = "gray")}
                 text(x=midpoint,y = 0.5, all$Gm1[count])
                 text(x=midpoint,y = 2.5, all$Gm2[count])
                 if(all$server[count]==1){text(x=midpoint,y = 0.2, "(s)",cex = 0.65)}
@@ -59,7 +61,6 @@ for(i in names(set_counter)){
         }
       
 }
-
 
 
 
