@@ -27,17 +27,20 @@ for(i in names(set_counter)){
         
         start_serving = point_set$Svr[1]
         plot(point_set$PtWinner, type = "p", pch = 16,ylim = c(0,3), cex = 0.5,
-             yaxt = "n",ylab = "",xlab = "",xaxt = "n")
-        text(x=0,y = start_serving, "(s)", cex = 0.75)
-        axis(side = 2, at = c(1,2), labels = c(sub(" ", "\n", player_name)),las = 2)
-        
+             yaxt = "n",ylab = "",xlab = "",xaxt = "n",xaxs = "r")
+        #text(x=-0.5,y = start_serving, "(s)", cex = 0.6)
+        axis(side = 2, at = c(1,2), labels = c(sub(" ", "\n", player_name)),las = 2, tck = 0)
+        abline(h=1.5)
         last_pt = aggregate(point_set$Pt, by = list(point_set$Gm.), FUN = tail, n = 1)
         game_1 = aggregate(point_set$Gm1.1, by = list(point_set$Gm.), FUN = tail, n = 1)
         game_2 = aggregate(point_set$Gm2.1, by = list(point_set$Gm.), FUN = tail, n = 1)
-        
+        server =aggregate(point_set$Svr, by = list(point_set$Gm.), FUN = tail, n = 1)
+        names(server)[2]="server"
         all = merge(last_pt, game_1, by = "Group.1")
         all = merge(all, game_2, by = "Group.1")
-        names(all) = c("Group", "Pt", "Gm1","Gm2")
+        all = merge(all, server, by = "Group.1")
+        
+        names(all) = c("Group", "Pt", "Gm1","Gm2","server")
         
         if(i !="0"){all$Pt = all$Pt - all$Pt[1] +(all$Pt[1] - point_set$Pt[1] +1)}
         all =all[order(as.numeric(as.character(all$Group))),]
@@ -50,6 +53,9 @@ for(i in names(set_counter)){
                 abline(v = j+0.5, col = "gray")
                 text(x=midpoint,y = 0.5, all$Gm1[count])
                 text(x=midpoint,y = 2.5, all$Gm2[count])
+                if(all$server[count]==1){text(x=midpoint,y = 0.2, "(s)",cex = 0.65)}
+                if(all$server[count]==2){text(x=midpoint,y = 2.8, "(s)",cex = 0.65)}
+                
         }
       
 }
