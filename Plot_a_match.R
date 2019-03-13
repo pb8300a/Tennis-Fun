@@ -32,7 +32,7 @@ for(i in names(set_counter)){
              yaxt = "n",ylab = "",xlab = "",xaxt = "n",xaxs = "r", 
              main = paste("Set", as.numeric(i)+1))
         #text(x=-0.5,y = start_serving, "(s)", cex = 0.6)
-        axis(side = 2, at = c(1,2), labels = c(sub(" ", "\n", player_name)),las = 2, tck = 0)
+        axis(side = 2, at = c(0.75,2.25), labels = c(sub(" ", "\n", player_name)),las = 2, tck = 0)
         abline(h=1.5)
         last_pt = aggregate(point_set$Pt, by = list(point_set$Gm.), FUN = tail, n = 1)
         game_1 = aggregate(point_set$Gm1.1, by = list(point_set$Gm.), FUN = tail, n = 1)
