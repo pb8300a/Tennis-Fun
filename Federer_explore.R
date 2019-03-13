@@ -1,4 +1,3 @@
-
 setwd("C:/Users/F400563/Desktop/tennis")
 data = read.csv("charting-w-stats-ServeBasics.csv")
 match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
@@ -8,9 +7,11 @@ raw_points$num_id = seq(1:nrow(raw_points))
 match_lvl= match_metadata[match_metadata$Player.1 == "Roger Federer" | match_metadata$Player.2 == "Roger Federer", ]
 point_lvl = merge(raw_points,match_lvl , by = "match_id")
 point_lvl = point_lvl[order(point_lvl$num_id),]
-##############################
-#####For a given match
-##############################
+
+
+#################################
+#####Plot the timeline of a match
+#################################
 point_match1 = point_lvl[point_lvl$match_id == "19981005-M-Basel-R32-Andre_Agassi-Roger_Federer",]
 
 
@@ -20,7 +21,7 @@ player_name = c(as.character(point_match1$Player.1)[1],as.character(point_match1
 par(mfrow =c(length(set_counter),1),mar = c(1,5,1,1))
 
 for(i in names(set_counter)){
-        i = "1"
+        #i = "1"
         point_set=point_match1[rowSums(point_match1[,c("Set1","Set2")])==as.numeric(i),]
         
         plot(point_set$PtWinner, type = "p", pch = 16,ylim = c(0,3), cex = 0.5,
@@ -49,4 +50,5 @@ for(i in names(set_counter)){
         }
       
 }
+
 
