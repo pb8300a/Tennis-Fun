@@ -1,5 +1,5 @@
 setwd("C:/Users/F400563/Desktop/tennis")
-data = read.csv("charting-w-stats-ServeBasics.csv")
+data = read.csv("charting-m-stats-ServeBasics.csv")
 match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
 raw_points = read.csv("charting-m-points.csv", header = TRUE)
 
@@ -9,7 +9,7 @@ raw_points$num_id = seq(1:nrow(raw_points))
 match_lvl= match_metadata[match_metadata$Player.1 == player_name | match_metadata$Player.2 ==player_name , ]
 point_lvl = merge(raw_points,match_lvl , by = "match_id")
 point_lvl = point_lvl[order(point_lvl$num_id),]
-
+point_lvl$Gm.=as.numeric(substr(point_lvl$Gm.,1,2))
 sample_id = sample(unique(point_lvl$match_id), 1)
 #################################
 #####Plot the timeline of a match
@@ -49,6 +49,7 @@ for(i in names(set_counter)){
         all =all[order(as.numeric(as.character(all$Group))),]
         count = 0
         lastpoint=0
+
         for(j in all$Pt){
                 if(count != 0){lastpoint = all$Pt[count]}
                 midpoint = (lastpoint + j+1)/2
@@ -62,6 +63,7 @@ for(i in names(set_counter)){
         }
       
 }
+
 
 
 
