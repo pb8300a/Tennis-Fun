@@ -1,35 +1,10 @@
 library(shiny)
+library(shinyWidgets)
 source("C:/Users/F400563/Desktop/tennis/point_shiny/court_squares.R")
-setwd("C:/Users/F400563/Desktop/tennis")
-#raw_points = read.csv("charting-m-points.csv", header = TRUE)
-#match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
-#point_lvl = merge(raw_points,match_metadata , by = "match_id")
-setwd("C:/Users/F400563/Desktop/tennis/point_shiny")
-
-
-player_choices = c("Roger Federer", "Novak Djokovic",   "Rafael Nadal", "Andy Murray")
-initial_player_1 = "Andy Murray"
-initial_player_2 = "Rafael Nadal"
-
-#setwd("C:/Users/F400563/Desktop/tennis")
-#match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
-tournament_choices = c("US Open","Wimbledon","Roland Garros", "Australian Open")
-tournament_choices = names(table(match_metadata$Tournament))
-
-initial_tournament = "Australian Open"
-year_choices = c(2005: 2010)
-initial_year = 2010
-
-point_choices=c(1:300)
-initial_point = 1
-#setwd("C:/Users/F400563/Desktop/tennis")
-#raw_points = read.csv("charting-m-points.csv", header = TRUE)
-#match_metadata = read.csv("charting-m-matches.csv", header = TRUE) #delete ? in the one column name
-#point_lvl = merge(raw_points,match_metadata , by = "match_id")
 
 ui = fluidPage(
         tabsetPanel(
-                tabPanel(title = "Plot a Match",
+                tabPanel(title = "Plot a Point",
                          sidebarLayout(
                             sidebarPanel(                                         
                                     tags$head(
@@ -67,7 +42,7 @@ ui = fluidPage(
                                                  multiple = FALSE
                                     ),
                                     selectInput(inputId = "pointnumber",
-                                                label = "Point Number",
+                                                label = "Score (Match, Set, Game)",
                                                 choices = point_choices,
                                                 selected = initial_point,
                                                 multiple = FALSE
@@ -84,12 +59,12 @@ ui = fluidPage(
                             mainPanel(
                                      fluidRow(
                                              plotOutput("plot_point",width = "100%", height = 800,
-                                                        brush = brushOpts(id = "plot_brush",fill = "green",clip = FALSE)),
-                                             textOutput("selected_var")
-                                     ) 
+                                                        brush = brushOpts(id = "plot_brush",fill = "green",clip = FALSE))
+                                     )
                             )
                     )
                 )         
         )
         
 )
+
