@@ -23,16 +23,16 @@ point_lvl$score = paste(point_lvl$Set1, "-", point_lvl$Set2,", ", point_lvl$Gm1,
 
 player_choices = unique(c(as.character(point_lvl$Player.1),as.character(point_lvl$Player.2)))
 #player_choices = c("Roger Federer","Novak Djokovic","Andy Murray","Rafael Nadal")
-initial_player_1 = "Andy Murray"
-initial_player_2 = "Rafael Nadal"
+initial_player_1 = "Rafael Nadal"
+initial_player_2 = "Albert Montanes"
 
 #setwd("C:/Users/F400563/Desktop/tennis")
 #tournament_choices = c("US Open","Wimbledon","Roland Garros", "Australian Open")
 tournament_choices = names(table(match_metadata$Tournament))
-initial_tournament = "Australian Open"
+initial_tournament = "Acapulco"
 
 year_choices = c(1980: 2019)
-initial_year = 2010
+initial_year = 2005
 
 point_choices="0-0, 0-0, 0-0"
 initial_point = "0-0, 0-0, 0-0"
