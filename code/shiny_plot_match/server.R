@@ -330,4 +330,3 @@ server <- function(input, output,session) {
         },height = 500,width = 800,units = "px")
         
 }
-
