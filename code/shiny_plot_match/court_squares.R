@@ -125,6 +125,18 @@ lines_court = function(){
 
 
 
+
+rally_end = function(){}
+        #e = "unknown"
+        #d = "deep"
+        #x = "wide and deep"
+        #n = "net"
+        #w = "wide"
+        #! = "shank"
+        #* = "winner"
+        
+
+        
         
 
         
